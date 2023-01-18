@@ -1,0 +1,61 @@
+@charset "utf-8";
+/* CSS Document */
+
+body { background: #000; }
+
+div#names, div#picker { display: none; }
+
+h1#headerNames {
+	width: 800px;
+	margin: 10% auto;
+	background-color: #fff;
+	color: #000;
+	font-family: Georgia, serif;
+	font-size: 150px;
+	text-align: center;
+	cursor: pointer;
+	padding: 10px 20px 20px 20px;
+}
+
+.button {
+	width: 150px;
+	margin: auto;
+	padding: 20px;
+	background: #1fa91f;
+	color: #fff;
+	font-family: Arial, sans-serif;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	text-transform: uppercase;
+	display: block;
+	cursor: pointer;
+    border: none;
+}
+
+div.names {
+    text-align: center;
+}
+    
+textarea {
+    font-size: 20px;
+    padding: 30px;
+	font-family: Georgia, serif;
+    display: block;
+	width: 500px;
+    height: 300px;
+	margin: 50px auto;  
+    background-color: #1A1A1A;
+    border: none;
+    color: #fff;
+} 
+
+img.logo { 
+    display: block;
+    width: 400px;
+	margin: 50px auto; 
+}
+
+@media only screen and (max-width: 600px) {
+	h1 { font-size: 50px; }
+}

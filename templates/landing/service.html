@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans "Bizning xizmatlar" %}{% endblock title %}
+{% block content %}
+    <div class="section section-lg bg-secondary">
+        <div class="container wide">
+            <div class="text-center">
+                <h1>{% trans "Bizning xizmatlar" %}</h1>
+                <div class="subtitle-2">{% trans "Ayollarning yosh, go'zal bo'lishini ta'minlash uchun kosmetologiya markazimiz quyidagi xizmatlarni taqdim etadi." %}</div>
+            </div>
+        </div>
+    </div>
+    <div class="section section section-xl">
+        <div class="container wide">
+            {% for service in object_list %}
+                <div class="row row-md-80 row-sm-50">
+                <div class="col-xs-10 col-md-6 col-lg-4">
+                    <div class="box-info-modern box-md">
+                        <div class="box-info-modern-figure"><img src="/media/{{ service.upload }}" alt="{{ service.title }}" width="390"
+                                                                 height="344"/>
+                        </div>
+                        <div class="box-info-modern-title"><a href="{{ service.get_absolute_url }}">{{ service.title }}</a></div>
+                        <div class="box-info-modern-text small">{{ service.short_desc }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!--Divider-->
+    <div class="section section-dv">
+        <div class="container wide">
+            <div class="divider"></div>
+        </div>
+    </div>
+    <div class="section section-custom">
+        <div class="container wide">
+            <div class="text-center">
+                <h2 class="title">Are You a Qualified <br class="br-none"> Massage Therapist?</h2>
+                <div class="subtitle-2 big">We are waiting for you to join our team</div>
+                <div class="row justify-content-center mb-5"><a class="button button-secondary button-md" href="#">Join
+                    Us</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}

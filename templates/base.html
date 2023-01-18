@@ -1,0 +1,57 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html class="wide wow-animation" lang="{{ LANGUAGE_CODE }}">
+<head>
+    <title>{% block title %}{% endblock title %} | {% trans "Yuqori malakali kosmetologlar  markazi" %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>.ie-panel {
+        display: none;
+        background: #212121;
+        padding: 10px 0;
+        box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, .3);
+        clear: both;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {
+        display: block;
+    }</style>
+
+    {% block css %}
+    {% endblock css %}
+</head>
+<body>
+<div class="preloader">
+    <div class="preloader-body">
+        <div class="cssload-container">
+            <div class="cssload-speeding-wheel"></div>
+        </div>
+        <p>{% trans 'Yuklanmoqda' %}...</p>
+    </div>
+</div>
+<div class="page">
+    {% include '_parts/navbar.html' %}
+    {% block content %}
+
+    {% endblock content %}
+    {% include '_parts/footer.html' %}
+</div>
+<div class="snackbars" id="form-output-global"></div>
+<script src="{% static 'js/core.min.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+{% block js %}
+{% endblock js %}
+</body>
+</html>

@@ -16,9 +16,8 @@
             {% for service in object_list %}
                 <div class="row row-md-80 row-sm-50">
                 <div class="col-xs-10 col-md-6 col-lg-4">
-                    <div class="box-info-modern box-md">
-                        <div class="box-info-modern-figure"><img src="/media/{{ service.upload }}" alt="{{ service.title }}" width="390"
-                                                                 height="344"/>
+                    <div class="box-info-modern box-md" >
+                        <div class="box-info-modern-figure"><img src="/media/{{ service.upload }}" alt="{{ service.title }}" />
                         </div>
                         <div class="box-info-modern-title"><a href="{{ service.get_absolute_url }}">{{ service.title }}</a></div>
                         <div class="box-info-modern-text small">{{ service.short_desc }}</div>

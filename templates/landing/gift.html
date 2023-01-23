@@ -1,7 +1,95 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
+
 {% block content %}
+
+        <head>
+    <script type="text/javascript">
+        window.onload = function () {
+  // Default variables
+  let i = 0;
+  let x = 0;
+  var namesDiv = document.getElementById("names");
+  var namesList = new Array();
+        {% for foo in client %}
+            namesList.push("{{ foo.name }}")
+        {% endfor %}
+  console.log(namesList);
+
+  var textarea = document.querySelector("input#names");
+  var submitButton = document.getElementById("submitButton");
+
+  var pickerDiv = document.getElementById("picker");
+  let intervalHandle = null;
+  var headerOne = document.getElementById("headerNames");
+  var startButton = document.getElementById("startButton");
+  var stopButton = document.getElementById("stopButton");
+
+  if (!Array.isArray(namesList) || !namesList.length) {
+    namesDiv.style.display = "block";
+    pickerDiv.style.display = "none";
+  } else {
+    namesDiv.style.display = "none";
+    pickerDiv.style.display = "block";
+  }
+
+  document
+    .getElementById("submitButton")
+    .addEventListener("click", function () {
+      confetti.remove();
+
+      // TODO: Add list of names to array from textarea
+      // Example... namesList = ["Anne","Bob","Gloria"];
+
+      namesList = textarea.value.replace(/\r\n/g, "\n").split("\n");
+
+      names.style.display = "none";
+      picker.style.display = "block";
+    });
+
+  // Start the name shuffle on button click
+  document.getElementById("startButton").addEventListener("click", function () {
+    this.style.display = "none";
+
+    shuffle(namesList);
+
+    confetti.remove();
+
+    intervalHandle = setInterval(function () {
+      headerNames.textContent = namesList[i++ % namesList.length];
+    }, 50);
+
+    setTimeout(function () {
+      clearInterval(intervalHandle);
+      startButton.style.display = "block";
+      confetti.start();
+    }, 3000);
+  });
+
+  function shuffle(array) {
+    var currentIndex = array.length,
+      temporaryValue,
+      randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+};
+
+    </script>
+</head>
 
     <section class="section-lg bg-secondary">
         <div class="container wide">
@@ -15,31 +103,69 @@
         <div class="container wide">
             <div class="row row-md-80 row-sm-50">
                 <div class="col-lg-6">
-                    <div class="subtitle">Make a perfect gift</div>
-                    <h2 class="title">Buy a gift massage voucher</h2>
-                    <div class="subtitle-2 big">Sed imperdiet hendrerit blandit. Integer at eges tas ante, a laoreet mi.
-                        In diam metus.
-                    </div>
+                    <div class="subtitle">Sovg'a qiling</div>
+                    <h2 class="title">O'z sovg'angizni yutib oling</h2>
+                    <div class="subtitle-2 big">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
                     <div class="list-wrap">
                         <ul class="list-marked">
                             <li>
-                                <p>Treat your friend in the privacy of their own home or hotel</p>
+                                <p>It has survived not only five centuries.</p>
                             </li>
                             <li>
-                                <p>Qualified professional massage therapists with all necessary</p>
+                                <p>It has survived not only five centuries.</p>
                             </li>
                             <li>
-                                <p>Easy online bookings and redemption</p>
+                                <p>It has survived not only five centuries.</p>
                             </li>
                             <li>
-                                <p>Beautifully designed, print-ready massage gift certificate</p>
+                                <p>It has survived not only five centuries.</p>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-6 justify-content-end mt-md-5 mt-sm-3"><img src="images/gift-card-610x550.jpg" alt=""
-                                                                            width="610" height="550"/>
+                <div class="col-6 justify-content-end mt-md-5 mt-sm-3 mt-3">
+                    <form class="needs-validation" method="post">
+                        {% csrf_token %}
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="F.I.O">
+                        <small id="emailHelp" class="form-text text-muted">EX: Testov Test Testvich</small>
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control{% if form.phone.errors %} is-invalid{% endif %}  " name="phone" id="exampleInputPassword1" aria-describedby="inputGroupPrepend" placeholder="Telefon">
+                          <div class="invalid-feedback">
+                            {{ form.phone.help_text }}
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <h5>Tuman</h5>
+                        <select name="district" class="form-control form-control-lg">
+                            {% for a in form.district %}
+                            <option>{{ a }}</option>
+                            {% endfor %}
+                        </select>
+                      </div>
+                      <div class="form-group">
+                      <h5>Viloyat</h5>
+                         <select name="region" class="form-control form-control-lg" >
+                             {% for a in form.region %}
+                            <option>{{ a }}</option>
+                            {% endfor %}
+                        </select>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
+            </div>
+            <div id="names">
+                <form action="">
+                    <textarea id="names" name="names" rows="4" cols="50" placeholder="Entre your names here..."></textarea>
+                    <input class="button" id="submitButton" type="submit" value="Submit">
+                </form>
+            </div>
+            <div id="picker" >
+                <p style="font-size: 25px">Buyerda yutgan odamning ismi chiqadi: <samp id="headerNames" style="font-size: 25px; font-weight: bold"></samp> </p>
+{#                <h1 >?</h1>#}
+                <div class="button" id="startButton">start</div>
             </div>
         </div>
     </div>
@@ -199,4 +325,25 @@
             </div>
         </div>
     </div>
+
+{#    <script>#}
+{#// Example starter JavaScript for disabling form submissions if there are invalid fields#}
+{#(function() {#}
+{#  'use strict';#}
+{#  window.addEventListener('load', function() {#}
+{#    // Fetch all the forms we want to apply custom Bootstrap validation styles to#}
+{#    var forms = document.getElementsByClassName('needs-validation');#}
+{#    // Loop over them and prevent submission#}
+{#    var validation = Array.prototype.filter.call(forms, function(form) {#}
+{#      form.addEventListener('submit', function(event) {#}
+{#        if (form.checkValidity() === false) {#}
+{#          event.preventDefault();#}
+{#          event.stopPropagation();#}
+{#        }#}
+{#        form.classList.add('was-validated');#}
+{#      }, false);#}
+{#    });#}
+{#  }, false);#}
+{#})();#}
+{#</script>#}
 {% endblock %}

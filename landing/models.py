@@ -85,12 +85,14 @@ class District(TranslatableModel):  # tuman
         return self.title
 
 
-class Client(models.Model):  #mijoz
+class Client(models.Model):  # mijoz
     name = models.CharField(_("F.I.O"), max_length=255)
     phone = models.CharField(_("Telefon raqami"), max_length=15)
     district = models.ForeignKey('landing.District', on_delete=models.SET_NULL, null=True,
                                  related_name='client_to_district')
     region = models.ForeignKey('landing.Region', on_delete=models.SET_NULL, null=True, related_name='client_to_region')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name

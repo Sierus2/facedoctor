@@ -32,14 +32,14 @@ class AboutIndex(TemplateView):
 
 
 def clietList(request):
-    client = Client.objects.all()
+    clients = Client.objects.all()
     form = ClientForm()
     if request.method == 'POST':
         form = ClientForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/konkurs')
-    context = {"client": client, "form":form}
+    context = {"clients": clients, "form":form}
     return render(request, 'landing/gift.html', context)
 
 

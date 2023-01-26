@@ -13,7 +13,7 @@
   var namesDiv = document.getElementById("names");
   var namesList = new Array();
         {% for foo in client %}
-            namesList.push("{{ foo.name }}")
+            namesList.push("{{ foo.name|safe }}")
         {% endfor %}
   console.log(namesList);
 
@@ -104,26 +104,34 @@
             <div class="row row-md-80 row-sm-50">
                 <div class="col-lg-6">
                     <div class="subtitle">Sovg'a qiling</div>
-                    <h2 class="title">O'z sovg'angizni yutib oling</h2>
-                    <div class="subtitle-2 big">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+                    <h3 class="title">G'olibni aniqlash oynasi</h3>
+                    <div class="subtitle-2 big">To'g'ridan-to'g'ri efir jarayonida g'oliblar aynan ushbu tugmani bosish orqali aniqlanadi. Buning uchun  </div>
                     <div class="list-wrap">
-                        <ul class="list-marked">
-                            <li>
-                                <p>It has survived not only five centuries.</p>
-                            </li>
-                            <li>
-                                <p>It has survived not only five centuries.</p>
-                            </li>
-                            <li>
-                                <p>It has survived not only five centuries.</p>
-                            </li>
-                            <li>
-                                <p>It has survived not only five centuries.</p>
-                            </li>
-                        </ul>
+
+<!--                        <ul class="list-marked">-->
+<!--                            <li>-->
+<!--                                <p>It has survived not only five centuries.</p>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <p>It has survived not only five centuries.</p>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <p>It has survived not only five centuries.</p>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <p>It has survived not only five centuries.</p>-->
+<!--                            </li>-->
+<!--                        </ul>-->
                     </div>
+                    <div id="picker" >
+                <p style="font-size: 25px">Aksiya g'olibi: <samp id="headerNames" style="font-size: 25px; font-weight: bold">Aniqlanmagan....</samp> </p>
+{#                <h1 >?</h1>#}
+                <div class="button btn col-12" id="startButton" >Aniqlash</div>
+            </div>
                 </div>
-                <div class="col-6 justify-content-end mt-md-5 mt-sm-3 mt-3">
+                <div class="col-lg-6 justify-content-end ">
+                    <div class="subtitle">Aksiyaga ishtirok etish uchun ro'yhatdan o'tish talab etiladi.</div>
+                    <h3 class="title">Ro'yhatdan o'tish</h3>
                     <form class="needs-validation" method="post">
                         {% csrf_token %}
                       <div class="form-group">
@@ -152,7 +160,7 @@
                             {% endfor %}
                         </select>
                       </div>
-                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="submit" class="btn btn-primary">Ishtirok etish</button>
                     </form>
                 </div>
             </div>
@@ -162,11 +170,7 @@
                     <input class="button" id="submitButton" type="submit" value="Submit">
                 </form>
             </div>
-            <div id="picker" >
-                <p style="font-size: 25px">Buyerda yutgan odamning ismi chiqadi: <samp id="headerNames" style="font-size: 25px; font-weight: bold"></samp> </p>
-{#                <h1 >?</h1>#}
-                <div class="button" id="startButton">start</div>
-            </div>
+
         </div>
     </div>
     <!--Gift Voucher-->

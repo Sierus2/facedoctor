@@ -4,7 +4,7 @@
 
 {% block content %}
 
-        <head>
+<head>
     <script type="text/javascript">
         window.onload = function () {
   // Default variables
@@ -12,8 +12,8 @@
   let x = 0;
   var namesDiv = document.getElementById("names");
   var namesList = new Array();
-        {% for foo in client %}
-            namesList.push("{{ foo.name|safe }}")
+        {% for client in clients %}
+            namesList.push("{{ client.name| safe }}")
         {% endfor %}
   console.log(namesList);
 
@@ -147,16 +147,16 @@
                       <div class="form-group">
                           <h5>Tuman</h5>
                         <select name="district" class="form-control form-control-lg">
-                            {% for a in form.district %}
-                            <option>{{ a }}</option>
+                            {% for district in form.district %}
+                            <option>{{ district }}</option>
                             {% endfor %}
                         </select>
                       </div>
                       <div class="form-group">
                       <h5>Viloyat</h5>
                          <select name="region" class="form-control form-control-lg" >
-                             {% for a in form.region %}
-                            <option>{{ a }}</option>
+                             {% for region in form.region %}
+                            <option>{{ region }}</option>
                             {% endfor %}
                         </select>
                       </div>

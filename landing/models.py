@@ -87,7 +87,7 @@ class District(TranslatableModel):  # tuman
 
 class Client(models.Model):  # mijoz
     name = models.CharField(_("F.I.O"), max_length=255)
-    phone = models.CharField(_("Telefon raqami"), max_length=15)
+    phone = models.CharField(_("Telefon raqami"), max_length=15) #, unique=True
     district = models.ForeignKey('landing.District', on_delete=models.SET_NULL, null=True,
                                  related_name='client_to_district')
     region = models.ForeignKey('landing.Region', on_delete=models.SET_NULL, null=True, related_name='client_to_region')

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from parler.models import TranslatableModel, TranslatedFields
 from django.utils.translation import gettext_lazy as _
 from django.template.defaultfilters import slugify as django_slugify
@@ -54,6 +55,31 @@ class Service(TranslatableModel):
         return "/service/%s/" % self.slug
 
 
+class Post(TranslatableModel):
+    translations = TranslatedFields(
+        title=models.CharField(_("Title"), max_length=255),
+        meta_d=models.CharField(_("Meta description"), max_length=255),
+        meta_k=models.CharField(_("Meta keywords"), max_length=255),
+        body=models.TextField(_("Body")),
+        short_desc=models.TextField(_("Short Desc")),
+    )
+    slug = models.SlugField(null=True, blank=True)
+    upload = models.ImageField(upload_to='uploads/%Y/%m/%d/')
+    created_at = models.DateTimeField(verbose_name=_('Created At'), null=True, auto_now=True)
+    updated_at = models.DateTimeField(verbose_name=_('Updated At'), null=True, blank=True, auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.title, self.id)
+        super(Post, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('post_detail', kwargs={'slug': self.slug})
+
+
 class FAQ(TranslatableModel):
     translations = TranslatedFields(
         question=models.CharField(_("Title"), max_length=255),
@@ -87,7 +113,7 @@ class District(TranslatableModel):  # tuman
 
 class Client(models.Model):  # mijoz
     name = models.CharField(_("F.I.O"), max_length=255)
-    phone = models.CharField(_("Telefon raqami"), max_length=15) #, unique=True
+    phone = models.CharField(_("Telefon raqami"), unique=True, max_length=15)
     district = models.ForeignKey('landing.District', on_delete=models.SET_NULL, null=True,
                                  related_name='client_to_district')
     region = models.ForeignKey('landing.Region', on_delete=models.SET_NULL, null=True, related_name='client_to_region')

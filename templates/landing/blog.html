@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans "Bizning postlar" %}{% endblock title %}
+{% block content %}
+    <style>
+    .main {
+    width: 50%;
+    margin: 50px auto;
+}
+
+/* Bootstrap 4 text input with search icon */
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+    </style>
+    <div class="main">
+    <form action="{% url 'search_url' %}" method="get">
+        <div class="input-group">
+            <input type="search" name="search" class="form-control" placeholder="Search this blog">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-secondary" type="button">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+    </div>
+    <div class="section section-lg bg-secondary">
+        <div class="container wide">
+            <div class="text-center">
+                <h1>{% trans "Bizning postlar" %}</h1>
+                <div class="subtitle-2">{% trans "Bizning postlardan kerakli ma'lumotlarni topishingiz mumkin" %}</div>
+            </div>
+        </div>
+    </div>
+    <div class="section section section-xl">
+        <div class="container wide">
+        <div class="row row-md-80 row-sm-50">
+            {% for post in object_list %}
+                <div class="col-xs-10 col-md-6 col-lg-4">
+                    <div class="box-info-modern box-md" >
+                        <div class="box-info-modern-figure"><img src="/media/{{ post.upload }}" alt="{{ post.title }}" />
+                        </div>
+                        <div class="box-info-modern-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></div>
+                        <div class="box-info-modern-text small">{{ post.short_desc }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        </div>
+        </div>
+    <!--Divider-->
+    <div class="section section-dv">
+        <div class="container wide">
+            <div class="divider"></div>
+        </div>
+    </div>
+    <div class="section section-custom">
+        <div class="container wide">
+            <div class="text-center">
+                <h2 class="title">Are You a Qualified <br class="br-none"> Massage Therapist?</h2>
+                <div class="subtitle-2 big">We are waiting for you to join our team</div>
+                <div class="row justify-content-center mb-5"><a class="button button-secondary button-md" href="#">Join
+                    Us</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}

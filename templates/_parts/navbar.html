@@ -40,6 +40,9 @@
                             <li class="rd-nav-item {% if request.resolver_match.url_name == 'gift' %}active{% endif %}">
                                     <a class="rd-nav-link" href="{% url "gift" %}">{% trans "Baxtli ishtirokchi" %}</a>
                                 </li>
+                            <li class="rd-nav-item"><a class="rd-nav-link"
+                                                           href="{% url 'post' %}">{% trans "Bizning postlar" %}</a>
+                                </li>
                                 <li class="rd-nav-item"><a class="rd-nav-link"
                                                            href="{% url 'about' %}">{% trans "Biz haqimizda" %}</a>
                                 </li>

@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.admin import ModelAdmin
 from parler.admin import TranslatableAdmin
 
 from landing.models import *
@@ -18,6 +19,12 @@ class ServiceAdmin(TranslatableAdmin):
     list_display_links = ['title', 'id']
     save_on_top = False
 
+
+@admin.register(Post)
+class PostAdmin(TranslatableAdmin, ModelAdmin):
+    list_display = ['title', 'id']
+    list_display_links = ['title', 'id']
+    save_on_top = False
 
 @admin.register(FAQ)
 class FAQAdmin(TranslatableAdmin):

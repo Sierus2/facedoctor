@@ -10,7 +10,7 @@ from .models import Client
 
 
 class ClientForm(forms.ModelForm):
-    phone = forms.RegexField(regex=r'^9\d{11}$', help_text="998911234567 shubday kiriting")
+    phone = forms.RegexField(regex=r'^9\d{11}$', help_text="Bunday telefon nomer mavjud")
 
     class Meta:
         model = Client

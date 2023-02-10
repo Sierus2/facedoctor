@@ -52,3 +52,9 @@ class DistrictAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', ]
     list_display_links = ['name', ]
     save_on_top = True
+
+@admin.register(ServiceClient)
+class ServiceClientAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'age', 'phoneNumber']
+    list_display_links = ['name', ]
+    save_on_top = True

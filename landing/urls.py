@@ -12,5 +12,7 @@ urlpatterns = [
     path('post/<slug:slug>/', post_detail, name='post_detail'),
     path('search/', search_result, name="search_url"),
     path('service/', ServiceIndex.as_view(), name='service'),
-    path('service/<str:slug>/', ServiceDetail.as_view(), name='service_detail'),
+    # path('service/<str:slug>/', ServiceDetail.as_view(), name='service_detail'),
+    path('service/<str:slug>/', serviceDetail, name='service_detail'),
+
 ]

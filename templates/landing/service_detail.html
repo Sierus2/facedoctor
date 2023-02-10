@@ -31,6 +31,39 @@
             <div class="divider"></div>
         </div>
     </div>
+    <div class="section section-xl">
+        <div class="container wide">
+            <div class="row row-md-80 row-sm-50">
+                <div class="col-lg-6">
+                    <div class="subtitle">Forma</div>
+                    <h3 class="title">Siz bilan bog'lanishadi</h3>
+                    <div class="subtitle-2 big">Xizmatdan foydalanish uchun keltirilgan qarorlarni to'ldiring.</div>
+                </div>
+                <div class="col-lg-6 justify-content-end ">
+                    <div class="subtitle">Aksiyaga ishtirok etish uchun ro'yhatdan o'tish talab etiladi.</div>
+                    <h3 class="title">Ro'yhatdan o'tish</h3>
+                    <form class="needs-validation" method="post">
+                        {% csrf_token %}
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="F.I.O">
+                        <small id="emailHelp" class="form-text text-muted">EX: Testov Test Testvich</small>
+                      </div>
+                     <div class="form-group">
+                        <input type="text" class="form-control" name="age" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Yosh">
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control{% if form.phoneNumber.errors %} is-invalid{% endif %}" name="phoneNumber" id="exampleInputPassword1" aria-describedby="inputGroupPrepend" placeholder="Telefon">
+                          <small id="emailHelp" class="form-text text-muted">EX: 998901234567</small>
+                          <div class="invalid-feedback">
+                            {{ form.phone.help_text }}
+                          </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Ishtirok etish</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--Pricing-->
     <div class="section section-lg">
         <div class="container wide">

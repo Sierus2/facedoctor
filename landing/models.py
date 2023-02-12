@@ -54,6 +54,14 @@ class Service(TranslatableModel):
     def get_absolute_url(self):
         return "/service/%s/" % self.slug
 
+class ServiceClient(models.Model):
+    service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='service_detail_client')
+    name = models.CharField(max_length=255)
+    age = models.CharField(max_length=20)
+    phoneNumber = models.CharField(max_length=13)
+    created_at = models.DateTimeField(verbose_name=_('Created At'), null=True, auto_now=True)
+    updated_at = models.DateTimeField(verbose_name=_('Updated At'), null=True, blank=True, auto_now_add=True)
+
 
 class Post(TranslatableModel):
     translations = TranslatedFields(

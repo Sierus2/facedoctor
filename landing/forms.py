@@ -3,7 +3,7 @@ import re
 from django import forms
 from django.core.exceptions import ValidationError
 
-from .models import Client
+from .models import Client, ServiceClient
 
 
 # phone_regex = re.compile(r"^9\d{12}$")
@@ -22,3 +22,9 @@ class ClientForm(forms.ModelForm):
         else:
             raise ValidationError("Bu nomer ro'yxatdan o'tgan");
         return phone
+
+
+class ServiceClientForm(forms.ModelForm):
+    class Meta:
+        model = ServiceClient
+        fields = ['name', 'age', 'phoneNumber']
